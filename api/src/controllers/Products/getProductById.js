@@ -21,7 +21,7 @@ const getProductById = async (req, res) => {
           },
         ],
       });
-      res.status(200).send(product);
+      return res.status(200).send(product);
     }
   } catch (e) {
     return res.status(400).send({ e: "Id incorrecto" });

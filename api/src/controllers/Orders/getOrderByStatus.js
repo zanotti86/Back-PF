@@ -5,8 +5,8 @@ const { Cart, ProductsInCart, Product } = require("../../db");
 async function getOrderByStatus(req, res, next) {
   try {
     var { status } = req.query;
-
-    status = status.toUpperCase();
+    if(status){
+      status = status.toUpperCase();
     if (status === "TODOS") {
       const cart2 = await Cart.findAll({
         include: [
@@ -71,6 +71,10 @@ async function getOrderByStatus(req, res, next) {
         }
       }
     }
+    }else{
+      return res.status(400).send({msg:"no se le esta pasando status"})
+    }
+    
   } catch (error) {
     next(error);
   }
